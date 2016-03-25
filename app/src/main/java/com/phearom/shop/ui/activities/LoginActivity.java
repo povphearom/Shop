@@ -2,7 +2,6 @@ package com.phearom.shop.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -14,11 +13,12 @@ import com.facebook.login.widget.LoginButton;
 import com.phearom.shop.R;
 import com.phearom.shop.api.utils.K;
 import com.phearom.shop.api.utils.SessionManager;
+import com.phearom.shop.ui.ShopBaseActivity;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements FacebookCallback<LoginResult> {
+public class LoginActivity extends ShopBaseActivity implements FacebookCallback<LoginResult> {
     private CallbackManager callbackManager;
     private LoginButton mLoginButton;
 

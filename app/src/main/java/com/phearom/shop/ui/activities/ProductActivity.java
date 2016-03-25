@@ -3,7 +3,6 @@ package com.phearom.shop.ui.activities;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,13 +21,14 @@ import com.phearom.shop.api.respositories.base.RealmHelper;
 import com.phearom.shop.binder.ProductBinder;
 import com.phearom.shop.databinding.ActivityProductBinding;
 import com.phearom.shop.mapper.ProductMapper;
+import com.phearom.shop.ui.ShopBaseActivity;
 import com.phearom.shop.ui.fragments.ProductAddDFragment;
 import com.phearom.shop.viewmodels.product.ProductViewModel;
 import com.phearom.shop.viewmodels.product.ProductsViewModel;
 
 import io.realm.RealmResults;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends ShopBaseActivity {
     private ActivityProductBinding mBinding = null;
 
     private ProductsViewModel mModels;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="products"
+            type="com.phearom.shop.viewmodels.product.ProductsViewModel" />
+
+        <variable
+            name="view"
+            type="com.phearom.shop.ui.fragments.ProductsViewFragment" />
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="4dp"
+        android:id="@+id/recycler_Product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:clickHandler="@{view.clickHandler}"
+        app:itemViewBinder="@{view.itemViewBinder}"
+        app:items="@{products.items}"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v7.widget.RecyclerView>
+</layout>
