@@ -3,7 +3,6 @@ package com.phearom.shop.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,33 +13,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.phearom.shop.R;
 import com.phearom.shop.api.utils.SessionManager;
 import com.phearom.shop.databinding.ActivityBaseBinding;
 import com.phearom.shop.ui.activities.LoginActivity;
-import com.phearom.shop.ui.fragments.MenuFragment;
 
 /**
  * Created by phearom on 3/25/16.
  */
 public abstract class ShopBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    protected DrawerLayout mDrawerLayout;
+    protected NavigationView mNavView;
     private ActivityBaseBinding mBinding;
     private Toolbar mToolbar;
-    private FloatingActionButton mFab;
-    private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private NavigationView mNavView;
-
     private FragmentTransaction mTransaction;
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mToolbar = null;
-        mFab = null;
         mDrawerLayout = null;
         mToggle = null;
         mTransaction = null;
@@ -48,7 +45,7 @@ public abstract class ShopBaseActivity extends AppCompatActivity implements Navi
         mBinding = null;
     }
 
-    public void setFragment(Fragment fragment, String title) {
+    public void loadFragment(Fragment fragment, String title) {
         setTitle(title);
         mTransaction = getSupportFragmentManager().beginTransaction();
         mTransaction.replace(R.id.contentPanel, fragment);
@@ -58,6 +55,7 @@ public abstract class ShopBaseActivity extends AppCompatActivity implements Navi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_base);
         setSupportActionBar(mBinding.appBarLayout.toolbar);
         setUpDrawer();
@@ -73,6 +71,12 @@ public abstract class ShopBaseActivity extends AppCompatActivity implements Navi
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         mNavView.setNavigationItemSelectedListener(this);
+        mNavView.getHeaderView(0).findViewById(R.id.btn_Logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutFacebook();
+            }
+        });
     }
 
     @Override
@@ -99,25 +103,12 @@ public abstract class ShopBaseActivity extends AppCompatActivity implements Navi
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_menu) {
-            setFragment(new MenuFragment(),"Menu");
-        } else if (id == R.id.nav_gallery) {
-        } else if (id == R.id.nav_slideshow) {
-        } else if (id == R.id.nav_manage) {
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_logout) {
-            logoutFacebook();
-        }
-
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
-    private void logoutFacebook() {
+    public void logoutFacebook() {
         if (AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logOut();
             SessionManager.init(this).reset();

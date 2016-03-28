@@ -11,11 +11,14 @@ import com.phearom.shop.ui.pageradapter.ProductPagerAdapter;
 import com.phearom.shop.viewmodels.product.ProductViewModel;
 import com.phearom.shop.viewmodels.product.ProductsViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PagerActivity extends ShopBaseActivity {
 
     private ActivityPagerBinding mBinding = null;
     private ProductPagerAdapter mPagerAdapter;
-//    private List<ProductsViewModel> mListProducts;
+    private List<ProductsViewModel> mListProducts;
 
     private String[] title = {"Breakfast", "Lunch", "Dinner", "Sweet", "Drink",};
 
@@ -27,12 +30,7 @@ public class PagerActivity extends ShopBaseActivity {
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        mListProducts = new ArrayList<>();
-
-        mPagerAdapter = new ProductPagerAdapter(getSupportFragmentManager());
-
-        mBinding.pager.setAdapter(mPagerAdapter);
-        mBinding.tab.setupWithViewPager(mBinding.pager);
+        mListProducts = new ArrayList<>();
 
         ProductsViewModel products;
         Product product;
@@ -47,7 +45,11 @@ public class PagerActivity extends ShopBaseActivity {
                 product.setCurrency(1);
                 products.add(new ProductViewModel(product));
             }
-            mPagerAdapter.addProducts(products);
+            mListProducts.add(products);
         }
+
+        mPagerAdapter = new ProductPagerAdapter(getSupportFragmentManager(), mListProducts);
+        mBinding.pager.setAdapter(mPagerAdapter);
+        mBinding.tab.setupWithViewPager(mBinding.pager);
     }
 }

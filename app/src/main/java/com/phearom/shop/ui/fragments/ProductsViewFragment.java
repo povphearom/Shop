@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.phearom.shop.BR;
 import com.phearom.shop.R;
@@ -23,8 +22,8 @@ import com.phearom.shop.viewmodels.product.ProductViewModel;
 import com.phearom.shop.viewmodels.product.ProductsViewModel;
 
 public class ProductsViewFragment extends Fragment {
-    public static RecyclerView.RecycledViewPool mPool;
-    public static ProductsViewModel mProducts;
+    public RecyclerView.RecycledViewPool mPool;
+    public ProductsViewModel mProducts;
 
     @Nullable
     @Override
@@ -54,7 +53,8 @@ public class ProductsViewFragment extends Fragment {
         return new ClickHandler<ProductViewModel>() {
             @Override
             public void onClick(ProductViewModel viewModel, View v) {
-                Toast.makeText(getContext(), viewModel.getName(), Toast.LENGTH_LONG).show();
+                DetailProductFragment dDial = DetailProductFragment.init(viewModel.getModel());
+                dDial.show(getChildFragmentManager(), "detail");
             }
         };
     }
