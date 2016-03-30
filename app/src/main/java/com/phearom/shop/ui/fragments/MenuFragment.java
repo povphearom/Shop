@@ -15,6 +15,7 @@ import com.phearom.shop.R;
 import com.phearom.shop.api.bindapi.binder.CompositeItemBinder;
 import com.phearom.shop.api.bindapi.binder.ItemBinder;
 import com.phearom.shop.api.bindapi.listener.ClickHandler;
+import com.phearom.shop.api.utils.SpacesItemDecoration;
 import com.phearom.shop.binder.MenuBinder;
 import com.phearom.shop.databinding.FragmentMenuBinding;
 import com.phearom.shop.models.Menu;
@@ -38,6 +39,7 @@ public class MenuFragment extends Fragment {
         mBinding.setMenus(mMenus);
         mBinding.setView(this);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mBinding.recyclerMenu.addItemDecoration(new SpacesItemDecoration(8));
         mBinding.recyclerMenu.setLayoutManager(layoutManager);
 
         return mBinding.getRoot();

@@ -8,10 +8,9 @@
         android:background="@color/white"
         tools:context="com.phearom.shop.ui.fragments.DetailProductFragment">
 
-
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -24,21 +23,16 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:theme="@style/Theme.AppCompat" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
-
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="10dp">
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/file_promotion" />
 
@@ -49,6 +43,11 @@
                     android:padding="4dp"
                     android:text="Product Name"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
